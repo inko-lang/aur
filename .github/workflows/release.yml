@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - name: Installing dependencies
@@ -27,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
+      options: --user 1001
     permissions:
       contents: write
     steps:
