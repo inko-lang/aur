@@ -49,7 +49,7 @@ then
     for i in {1..3}
     do
         info 'Pushing to the AUR'
-        git push origin "${aur_branch}" && break
+        git push origin "${aur_branch}" && return
         info "Push attempt $i failed, retrying..."
     done
 

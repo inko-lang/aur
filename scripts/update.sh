@@ -45,7 +45,7 @@ then
     for i in {1..3}
     do
         info 'Pushing to main'
-        git push origin main && break
+        git push origin main && return
         info "Push attempt $i failed, retrying..."
     done
 
