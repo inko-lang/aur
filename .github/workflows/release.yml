@@ -22,7 +22,7 @@ jobs:
       - name: Creating build user
         run: bash scripts/user.sh
       - name: Running tests
-        run: sudo -u build bash scripts/test.sh "${{ github.event.inputs.name }}"
+        run: bash scripts/test.sh "${{ github.event.inputs.name }}"
   release:
     needs:
       - test
@@ -39,10 +39,9 @@ jobs:
         run: bash scripts/user.sh
       - name: Updating PKGBUILD
         run: |
-          sudo -u build bash scripts/update.sh inko \
-            "${{ github.event.inputs.version }}"
+          bash scripts/update.sh inko "${{ github.event.inputs.version }}"
       - name: Updating AUR repository
         run: |
-          sudo -u build bash scripts/aur.sh inko \
+          bash scripts/aur.sh inko \
             "${{ github.event.inputs.version }}" \
             "${{ secrets.AUR_SSH_KEY }}"

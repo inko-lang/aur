@@ -23,7 +23,14 @@ sed --regexp-extended --in-place --expression \
     "s/pkgver=(.+)/pkgver=${version}/g" PKGBUILD
 
 updpkgsums PKGBUILD
-makepkg --printsrcinfo > .SRCINFO
+
+if [[ -v CI ]]
+then
+    sudo -u build makepkg --printsrcinfo | tee .SRCINFO
+else
+    makepkg --printsrcinfo > .SRCINFO
+fi
+
 rm *.tar.gz
 git add PKGBUILD .SRCINFO
 
