@@ -28,7 +28,7 @@ then
     info 'Configuring SSH'
     export SSH_AUTH_SOCK="/tmp/ssh_agent.sock"
     ssh-agent -a $SSH_AUTH_SOCK >/dev/null
-    ssh-add - <<< "{ssh_key}"
+    ssh-add - <<< "${ssh_key}"
 fi
 
 info 'Updating AUR'
