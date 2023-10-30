@@ -31,6 +31,8 @@ then
     ssh-add - <<< "${ssh_key}"
 fi
 
+export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
+
 info 'Updating AUR'
 
 git clone "ssh://aur@aur.archlinux.org/${name}.git" "${aur_clone}"
