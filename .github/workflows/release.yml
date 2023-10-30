@@ -1,7 +1,7 @@
 ---
 name: Release
 run-name: |
-  Release ${{ github.events.inputs.name }} v${{ github.events.inputs.version }}
+  Release ${{ inputs.name }} v${{ inputs.version }}
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
       - name: Updating permissions
         run: setfacl -R -m u:build:rwx .
       - name: Running tests
-        run: bash scripts/test.sh "${{ github.event.inputs.name }}"
+        run: bash scripts/test.sh "${{ inputs.name }}"
   release:
     needs:
       - test
@@ -38,9 +38,8 @@ jobs:
         run: setfacl -R -m u:build:rwx .
       - name: Updating PKGBUILD
         run: |
-          bash scripts/update.sh inko "${{ github.event.inputs.version }}"
+          bash scripts/update.sh inko "${{ inputs.version }}"
       - name: Updating AUR repository
         run: |
-          bash scripts/aur.sh inko \
-            "${{ github.event.inputs.version }}" \
+          bash scripts/aur.sh inko "${{ inputs.version }}" \
             "${{ secrets.AUR_SSH_KEY }}"
