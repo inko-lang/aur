@@ -15,9 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/inko-lang/aur:main
-      options: --user build
     steps:
       - uses: actions/checkout@v4
+      - name: Updating permissions
+        run: setfacl -R -m u:build:rwx .
       - name: Running tests
         run: bash scripts/test.sh "${{ github.event.inputs.name }}"
   release:
@@ -26,11 +27,12 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/inko-lang/aur:main
-      options: --user build
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - name: Updating permissions
+        run: setfacl -R -m u:build:rwx .
       - name: Updating PKGBUILD
         run: |
           bash scripts/update.sh inko "${{ github.event.inputs.version }}"
