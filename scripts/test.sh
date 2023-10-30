@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 set -e
+source ./scripts/setup.sh
 
 name="${1}"
 
 if [[ "${name}" = '' ]]
 then
-    echo 'The package name must be specified as the first argument'
-    exit 1
+    error 'The package name must be specified as the first argument'
 fi
 
 cd "${name}"

@@ -8,14 +8,12 @@ version="${2}"
 
 if [[ "${name}" = '' ]]
 then
-    echo 'The package name must be specified as the first argument'
-    exit 1
+    error 'The package name must be specified as the first argument'
 fi
 
 if [[ "${version}" = '' ]]
 then
-    echo 'The version must be specified as the second argument'
-    exit 1
+    error 'The version must be specified as the second argument'
 fi
 
 cd "${name}"

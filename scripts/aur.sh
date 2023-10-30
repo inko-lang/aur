@@ -10,20 +10,17 @@ aur_clone="/tmp/aur-${name}"
 
 if [[ "${name}" = '' ]]
 then
-    echo 'The package name must be specified as the first argument'
-    exit 1
+    error 'The package name must be specified as the first argument'
 fi
 
 if [[ "${version}" = '' ]]
 then
-    echo 'The version must be specified as the second argument'
-    exit 1
+    error 'The version must be specified as the second argument'
 fi
 
 if [[ "${ssh_key}" = '' ]]
 then
-    echo 'The SSH private key must be specified as the third argument'
-    exit 1
+    error 'The SSH private key must be specified as the third argument'
 fi
 
 if [[ -v CI ]]
