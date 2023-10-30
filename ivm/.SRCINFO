@@ -1,0 +1,21 @@
+pkgbase = ivm
+	pkgdesc = The cross-platform Inko version manager
+	pkgver = 0.4.1
+	pkgrel = 1
+	url = https://inko-lang.org
+	arch = x86_64
+	license = MPL2
+	makedepends = cargo
+	makedepends = make
+	depends = llvm15
+	depends = git
+	depends = base-devel
+	provides = ivm
+	options = strip
+	options = !docs
+	options = !libtool
+	options = !staticlibs
+	source = https://github.com/inko-lang/ivm/archive/refs/tags/v0.4.1.tar.gz
+	sha256sums = 98d325646dd0e2a4425a32e8666edd82e9da0b7f1375401676c3946a2bf5ea10
+
+pkgname = ivm
