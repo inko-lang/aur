@@ -50,7 +50,7 @@ then
     for i in {1..3}
     do
         info 'Pushing to main'
-        git push origin main && return
+        git push origin main && exit 0
         info "Push attempt $i failed, retrying..."
     done
 
