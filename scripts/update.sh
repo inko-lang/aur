@@ -20,6 +20,11 @@ cd "${name}"
 
 info 'Updating package version'
 
+if [[ "${name}" == *-git ]]
+then
+    error 'Git packages must be updated manually'
+fi
+
 sed --regexp-extended --in-place --expression \
     "s/pkgver=(.+)/pkgver=${version}/g" PKGBUILD
 
