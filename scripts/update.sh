@@ -22,12 +22,13 @@ cd "${name}"
 sed --regexp-extended --in-place --expression \
     "s/pkgver=(.+)/pkgver=${version}/g" PKGBUILD
 
-updpkgsums PKGBUILD
 
 if [[ -v CI ]]
 then
+    sudo -u build updpkgsums PKGBUILD
     sudo -u build makepkg --printsrcinfo | tee .SRCINFO
 else
+    updpkgsums PKGBUILD
     makepkg --printsrcinfo > .SRCINFO
 fi
 
