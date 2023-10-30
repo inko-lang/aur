@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Installing dependencies
-        run: pacman -Syu pacman-contrib base-devel bash git
+        run: pacman -Syu --noconfirm --noprogress pacman-contrib base-devel bash git
       - name: Running tests
         run: bash scripts/test.sh ${{ github.event.inputs.name }}
   release:
@@ -32,7 +32,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Installing dependencies
-        run: pacman -Syu pacman-contrib base-devel bash git openssh
+        run: pacman -Syu --noconfirm --noprogress pacman-contrib base-devel bash git openssh
       - name: Updating PKGBUILD
         run: bash scripts/update.sh inko ${{ github.event.inputs.version }}
       - name: Updating AUR repository
