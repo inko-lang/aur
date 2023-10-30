@@ -40,28 +40,3 @@ then
 else
     info 'Nothing to commit'
 fi
-
-# Push the changes to the AUR.
-aur_clone="/tmp/aur-${name}"
-
-git clone "ssh://aur@aur.archlinux.org/${name}.git" "${aur_clone}"
-cp PKGBUILD "${aur_clone}/PKGBUILD"
-cp .SRCINFO "${aur_clone}/.SRCINFO"
-cd "${aur_clone}"
-git add PKGBUILD .SRCINFO
-
-aur_branch="$(git rev-parse --abbrev-ref HEAD)"
-
-if git commit -m "Update ${name} to v${version}"
-then
-    for i in {1..3}
-    do
-        info 'Pushing to the AUR'
-        git push origin "${aur_branch}" && break
-        info "Push attempt $i failed, retrying..."
-    done
-
-    error 'Failed to push to the AUR'
-else
-    info 'Nothing to commit to the AUR'
-fi
