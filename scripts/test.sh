@@ -11,13 +11,6 @@ then
 fi
 
 cd "${name}"
-
-if [[ -v CI ]]
-then
-    sudo -u build makepkg --cleanbuild --force --noconfirm --clean
-else
-    makepkg --cleanbuild --force --noconfirm --clean
-fi
-
+makepkg --cleanbuild --force --noconfirm --clean
 rm *.tar.gz
 rm *.zst

@@ -14,13 +14,9 @@ jobs:
   test:
     runs-on: ubuntu-latest
     container:
-      image: archlinux:latest
+      image: ghcr.io/inko-lang/aur:latest
     steps:
       - uses: actions/checkout@v4
-      - name: Installing dependencies
-        run: bash scripts/deps.sh
-      - name: Creating build user
-        run: bash scripts/user.sh
       - name: Running tests
         run: bash scripts/test.sh "${{ github.event.inputs.name }}"
   release:
@@ -28,15 +24,11 @@ jobs:
       - test
     runs-on: ubuntu-latest
     container:
-      image: archlinux:latest
+      image: ghcr.io/inko-lang/aur:latest
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
-      - name: Installing dependencies
-        run: bash scripts/deps.sh
-      - name: Creating build user
-        run: bash scripts/user.sh
       - name: Updating PKGBUILD
         run: |
           bash scripts/update.sh inko "${{ github.event.inputs.version }}"
