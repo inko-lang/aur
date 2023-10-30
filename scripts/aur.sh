@@ -28,10 +28,13 @@ fi
 
 if [[ -v CI ]]
 then
+    info 'Configuring SSH'
     export SSH_AUTH_SOCK="/tmp/ssh_agent.sock"
     ssh-agent -a $SSH_AUTH_SOCK >/dev/null
     ssh-add - <<< "{ssh_key}"
 fi
+
+info 'Updating AUR'
 
 git clone "ssh://aur@aur.archlinux.org/${name}.git" "${aur_clone}"
 cp PKGBUILD "${aur_clone}/PKGBUILD"

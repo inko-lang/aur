@@ -12,6 +12,8 @@ fi
 
 cd "${name}"
 
+info 'Running test build'
+
 if [[ -v CI ]]
 then
     sudo -u build makepkg --cleanbuild --force --noconfirm --clean --syncdeps \

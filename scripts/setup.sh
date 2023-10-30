@@ -14,4 +14,5 @@ then
     info 'Configuring Git'
     git config --global user.email noreply@inko-lang.org
     git config --global user.name 'Inko bot'
+    git config --global --add safe.directory '*'
 fi

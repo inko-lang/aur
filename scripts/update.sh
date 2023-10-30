@@ -19,20 +19,27 @@ then
 fi
 
 cd "${name}"
+
+info 'Updating package version'
+
 sed --regexp-extended --in-place --expression \
     "s/pkgver=(.+)/pkgver=${version}/g" PKGBUILD
 
+info 'Updating checksum and .SRCINFO'
 
 if [[ -v CI ]]
 then
     sudo -u build updpkgsums PKGBUILD
     sudo -u build makepkg --printsrcinfo | tee .SRCINFO
+    chown root:root PKGBUILD .SRCINFO *.tar.gz
 else
     updpkgsums PKGBUILD
     makepkg --printsrcinfo > .SRCINFO
 fi
 
 rm *.tar.gz
+
+info 'Pushing changes'
 git add PKGBUILD .SRCINFO
 
 if git commit -m "Update ${name} to v${version}"
