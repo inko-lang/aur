@@ -14,9 +14,11 @@ cd "${name}"
 
 if [[ -v CI ]]
 then
-    sudo -u build makepkg --cleanbuild --force --noconfirm --clean --syncdeps
+    sudo -u build makepkg --cleanbuild --force --noconfirm --clean --syncdeps \
+        --noconfirm --noprogressbar
 else
-    makepkg --cleanbuild --force --noconfirm --clean --syncdeps
+    makepkg --cleanbuild --force --noconfirm --clean --syncdeps --noconfirm \
+        --noprogressbar
 fi
 
 rm *.tar.gz
