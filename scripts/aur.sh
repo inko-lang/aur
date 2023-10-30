@@ -35,6 +35,7 @@ export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=accept-new"
 
 info 'Updating AUR'
 
+cd "${name}"
 git clone "ssh://aur@aur.archlinux.org/${name}.git" "${aur_clone}"
 cp PKGBUILD "${aur_clone}/PKGBUILD"
 cp .SRCINFO "${aur_clone}/.SRCINFO"
