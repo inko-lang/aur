@@ -5,5 +5,3 @@ RUN pacman -Syu --noconfirm --noprogress pacman-contrib base-devel bash git \
 
 RUN useradd --no-create-home build \
     && echo 'build ALL=(ALL:ALL) ALL' > /etc/sudoers.d/build
-
-USER build

@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/inko-lang/aur:main
+      options: --user build
     steps:
       - uses: actions/checkout@v4
       - name: Running tests
@@ -25,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/inko-lang/aur:main
+      options: --user build
     permissions:
       contents: write
     steps:
