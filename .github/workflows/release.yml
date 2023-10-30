@@ -15,32 +15,34 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
-      options: --user 1001
     steps:
       - uses: actions/checkout@v4
       - name: Installing dependencies
-        run: pacman -Syu --noconfirm --noprogress pacman-contrib base-devel bash git
+        run: bash scripts/deps.sh
+      - name: Creating build user
+        run: bash scripts/user.sh
       - name: Running tests
-        run: bash scripts/test.sh ${{ github.event.inputs.name }}
+        run: sudo -u build bash scripts/test.sh "${{ github.event.inputs.name }}"
   release:
     needs:
       - test
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
-      options: --user 1001
     permissions:
       contents: write
     steps:
       - uses: actions/checkout@v4
       - name: Installing dependencies
-        run: pacman -Syu --noconfirm --noprogress pacman-contrib base-devel bash git openssh
+        run: bash scripts/deps.sh
+      - name: Creating build user
+        run: bash scripts/user.sh
       - name: Updating PKGBUILD
-        run: bash scripts/update.sh inko ${{ github.event.inputs.version }}
-      - name: Updating AUR repository
-        env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
         run: |
-          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
-          ssh-add - <<< "${{ secrets.AUR_SSH_KEY }}"
-          bash scripts/aur.sh inko ${{ github.event.inputs.version }}
+          sudo -u build bash scripts/update.sh inko \
+            "${{ github.event.inputs.version }}"
+      - name: Updating AUR repository
+        run: |
+          sudo -u build bash scripts/aur.sh inko \
+            "${{ github.event.inputs.version }}" \
+            "${{ secrets.AUR_SSH_KEY }}"

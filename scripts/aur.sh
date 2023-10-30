@@ -5,6 +5,7 @@ source ./scripts/setup.sh
 
 name="${1}"
 version="${2}"
+ssh_key="${3}"
 aur_clone="/tmp/aur-${name}"
 
 if [[ "${name}" = '' ]]
@@ -17,6 +18,19 @@ if [[ "${version}" = '' ]]
 then
     echo 'The version must be specified as the second argument'
     exit 1
+fi
+
+if [[ "${ssh_key}" = '' ]]
+then
+    echo 'The SSH private key must be specified as the third argument'
+    exit 1
+fi
+
+if [[ -v CI ]]
+then
+    export SSH_AUTH_SOCK="/tmp/ssh_agent.sock"
+    ssh-agent -a $SSH_AUTH_SOCK >/dev/null
+    ssh-add - <<< "{ssh_key}"
 fi
 
 git clone "ssh://aur@aur.archlinux.org/${name}.git" "${aur_clone}"
