@@ -38,8 +38,8 @@ jobs:
         run: setfacl -R -m u:build:rwx .
       - name: Updating PKGBUILD
         run: |
-          bash scripts/update.sh inko "${{ inputs.version }}"
+          bash scripts/update.sh "${{ inputs.name }}" "${{ inputs.version }}"
       - name: Updating AUR repository
         run: |
-          bash scripts/aur.sh inko "${{ inputs.version }}" \
+          bash scripts/aur.sh "${{ inputs.name }}" "${{ inputs.version }}" \
             "${{ secrets.AUR_SSH_KEY }}"
