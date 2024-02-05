@@ -14,16 +14,6 @@ on:
         required: true
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/inko-lang/aur:main
-    steps:
-      - uses: actions/checkout@v4
-      - name: Updating permissions
-        run: setfacl -R -m u:build:rwx .
-      - name: Running tests
-        run: bash scripts/test.sh "${{ inputs.name }}"
   release:
     needs:
       - test
