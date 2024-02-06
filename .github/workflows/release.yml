@@ -15,8 +15,6 @@ on:
 
 jobs:
   release:
-    needs:
-      - test
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/inko-lang/aur:main
