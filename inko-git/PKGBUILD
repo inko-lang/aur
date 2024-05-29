@@ -14,6 +14,7 @@ conflicts=(inko)
 options=(strip !docs !libtool !staticlibs)
 source=('inko::git+https://github.com/inko-lang/inko.git')
 sha256sums=('SKIP')
+options=(!lto)
 
 pkgver() {
     cd inko

@@ -14,6 +14,7 @@ conflicts=(inko-git)
 options=(strip !docs !libtool !staticlibs)
 source=("https://releases.inko-lang.org/${pkgver}.tar.gz")
 sha256sums=('4e2c82911d6026f76c42ccc164dc45b1b5e331db2e9557460d9319d682668e65')
+options=(!lto)
 
 build() {
     make build PREFIX='/usr'

@@ -14,6 +14,7 @@ conflicts=()
 options=(strip !docs !libtool !staticlibs)
 source=("https://github.com/inko-lang/ivm/archive/refs/tags/v${pkgver}.tar.gz")
 sha256sums=('befa62c13316dc5c14144c10f642ef6c21c86226f9ffd8b66a36b27cc54b64d9')
+options=(!lto)
 
 build() {
     cd "${pkgname}-${pkgver}"
