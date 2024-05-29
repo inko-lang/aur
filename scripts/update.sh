@@ -22,11 +22,11 @@ info 'Updating package version'
 
 if [[ "${name}" == *-git ]]
 then
-    error 'Git packages must be updated manually'
+    info 'Skipping version update for Git package'
+else
+    sed --regexp-extended --in-place --expression \
+        "s/pkgver=(.+)/pkgver=${version}/g" PKGBUILD
 fi
-
-sed --regexp-extended --in-place --expression \
-    "s/pkgver=(.+)/pkgver=${version}/g" PKGBUILD
 
 info 'Updating checksum and .SRCINFO'
 
