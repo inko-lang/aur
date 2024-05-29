@@ -34,7 +34,13 @@ if [[ -v CI ]]
 then
     sudo -u build updpkgsums PKGBUILD
     sudo -u build makepkg --printsrcinfo | tee .SRCINFO
-    chown root:root PKGBUILD .SRCINFO *.tar.gz
+    chown root:root PKGBUILD .SRCINFO
+
+    # Git packages don't produce source archives
+    if [[ "${name}" != *-git ]]
+    then
+        chown root:root *.tar.gz
+    fi
 else
     updpkgsums PKGBUILD
     makepkg --printsrcinfo > .SRCINFO
@@ -51,8 +57,8 @@ else
         --noprogressbar
 fi
 
-rm *.tar.gz
-rm *.zst
+rm -f *.tar.gz
+rm -f *.zst
 
 info 'Pushing changes'
 git add PKGBUILD .SRCINFO
