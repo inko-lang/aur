@@ -1,7 +1,7 @@
 FROM archlinux:latest
 
 RUN pacman -Syu --noconfirm --noprogress pacman-contrib base-devel bash git \
-    sudo openssh rust llvm15-libs llvm15
+    sudo openssh rust llvm16-libs llvm16
 
 RUN useradd --home-dir=/home/build --create-home build \
     && echo 'build ALL=(ALL) NOPASSWD: ALL' > /etc/sudoers.d/build \
