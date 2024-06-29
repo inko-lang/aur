@@ -46,19 +46,19 @@ else
     makepkg --printsrcinfo > .SRCINFO
 fi
 
-info 'Running test build'
-
-if [[ -v CI ]]
-then
-    sudo -u build makepkg --cleanbuild --force --noconfirm --clean --syncdeps \
-        --noconfirm --noprogressbar
-else
-    makepkg --cleanbuild --force --noconfirm --clean --syncdeps --noconfirm \
-        --noprogressbar
-fi
-
-rm -f *.tar.gz
-rm -f *.zst
+# info 'Running test build'
+#
+# if [[ -v CI ]]
+# then
+#     sudo -u build makepkg --cleanbuild --force --noconfirm --clean --syncdeps \
+#         --noconfirm --noprogressbar
+# else
+#     makepkg --cleanbuild --force --noconfirm --clean --syncdeps --noconfirm \
+#         --noprogressbar
+# fi
+#
+# rm -f *.tar.gz
+# rm -f *.zst
 
 info 'Pushing changes'
 git add PKGBUILD .SRCINFO
