@@ -23,7 +23,7 @@ pkgver() {
 
 build() {
     cd inko
-    make build PREFIX='/usr'
+    RUSTFLAGS="$RUSTFLAGS -C force-unwind-tables" make build PREFIX='/usr'
 }
 
 package() {
